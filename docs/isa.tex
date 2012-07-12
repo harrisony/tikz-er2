@@ -1,0 +1,12 @@
+\tikzstyle{every isa} = [fill=green!20]
+\begin{tikzpicture}[node distance=6em]
+    \node[entity] (animal) {Animal};
+    \node[isa] (isa1) [below of=animal, node distance=5em] {ISA} 
+        edge node [auto,swap] {disjoint} (animal);
+    \node [entity] (human) [below left of=isa1] {Human} edge (isa1);
+    \node [entity] (dog) [below right of=isa1] {Dog} edge (isa1);
+    \node[isa] (isa2) [below of=human, node distance=5em] {ISA} 
+        edge [total] (human);
+    \node [entity] (man) [below left of=isa2] {Man} edge (isa2);
+    \node [entity] (woman) [below right of=isa2] {Woman} edge (isa2);
+\end{tikzpicture}

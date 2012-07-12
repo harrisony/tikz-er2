@@ -1,0 +1,5 @@
+\begin{tikzpicture}[node distance=8em]
+    \node[entity] (person) {Person};
+    \node[relationship] (uses) [right of=person] {Uses} edge [->] (person);        
+    \node[entity] (tool) [right of=uses] {Tool} edge [total] (uses);
+\end{tikzpicture}

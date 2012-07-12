@@ -1,0 +1,7 @@
+\begin{tikzpicture}[node distance=8em]
+    \node[entity] (person) {Person};
+    \node[relationship] (uses) [right of=person] {Uses} 
+        edge node[auto,swap] {0..*} (person);        
+    \node[entity] (tool) [right of=uses] {Tool} 
+        edge node[auto,swap] {1..3} (uses);
+\end{tikzpicture}

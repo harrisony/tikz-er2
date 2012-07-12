@@ -1,0 +1,7 @@
+\tikzstyle{every relationship} = [fill=red!20]
+\tikzstyle{every edge} = [link]
+\begin{tikzpicture}[node distance=8em]
+    \node[entity] (person) {Person};
+    \node[relationship] (uses) [right of=person] {Uses} edge (person);        
+    \node[entity] (tool) [right of=uses] {Tool} edge (uses);
+\end{tikzpicture}

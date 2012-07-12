@@ -1,0 +1,11 @@
+\tikzstyle{every attribute} = [fill=yellow!20]
+\begin{tikzpicture}[node distance=7em]
+    \node[entity] (person) {Person}; 
+    \node[attribute] (pid) [left of=person] {\key{ID}} edge (person); 
+    \node[attribute] (name) [above left of=person] {Name} edge (person); 
+    \node[multi attribute] (phone) [above of=person] {Phone} edge (person); 
+    \node[attribute] (address) [above right of=person] {Address} edge (person);
+    \node[attribute] (street) [above right of=address] {Street} edge (address); 
+    \node[attribute] (city) [right of=address] {City} edge (address); 
+    \node[derived attribute] (age) [right of=person] {Age} edge (person);
+\end{tikzpicture}

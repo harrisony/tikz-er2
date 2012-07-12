@@ -1,0 +1,6 @@
+\begin{tikzpicture}[node distance=10.5em]
+    \node[relationship] (arrests) {Arrests};
+    \node[entity] (person) [right of=arrests] {Person};
+    \draw (person.165) edge [<-] node[auto,swap] {cop} (arrests.35)
+          (person.-165) edge node[auto] {robber} (arrests.-35);
+\end{tikzpicture}

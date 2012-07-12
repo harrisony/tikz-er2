@@ -1,0 +1,276 @@
+\documentclass[12pt]{article}
+
+\usepackage{url}
+\usepackage{a4wide}
+\usepackage{moreverb}
+\usepackage{rotating}
+
+\usepackage{tikz-er2}
+
+
+\newcommand{\demo}[1]{
+  \bigskip
+  \begin{minipage}{\linewidth}
+      \begin{center}
+          \input{#1}
+      \end{center}
+      \begin{center}
+          \verbatiminput{#1}
+      \end{center}
+  \end{minipage}
+}
+
+
+\begin{document}
+
+\title{The \emph{Tikz-er2} Package for\\Drawing Entity-Relationship Diagrams}
+\author{P\'avel Calado\footnote{Contact information can be found at \texttt{http://tagus.inesc-id.pt/$\sim$pcalado}}}
+\maketitle
+
+\tikzstyle{every edge} = [link]
+
+\tableofcontents
+
+\begin{abstract}
+    This document describes \emph{Tikz-er2}, a \LaTeX\ package for drawing
+    Entity-Relationship diagrams. \emph{Tikz-er2} uses Tikz/PGF for graphics
+    and is very easy to use. In the following, you can find instructions on how
+    to draw each individual E-R element and an example of a full E-R diagram.
+\end{abstract}
+
+\section{The \emph{Tikz-er2} Package}
+\label{sec:emphtikz-er2-package}
+
+\emph{Tikz-er2} is a \LaTeX\ package that uses the
+Tikz/PGF\footnote{\url{http://sourceforge.net/projects/pgf/}} library to draw
+Entity-Relationship diagrams.  It is, in practice, a set of Tikz styles, which
+you can use together with your usual Tikz instructions to draw the diagrams.
+
+Tikz already has an E-R diagram library.  However, I felt it was very
+incomplete, lacking some of the features I usually require when designing
+databases. Thus, I implemented \emph{Tikz-er2}, which uses the E-R notation
+described in the book ``Database System Concepts'', by Silberchatz et
+al.\footnote{Abraham Silberschatz, Henry F. Korth, and S. Sudarshan: ``Database
+System Concepts''. 5th Edition, McGraw-Hill, 2005.}
+
+This package, as everything else in the Tikz library, is very easy to use. In
+the following sections, you will find a full set of examples of how to use it to
+create an E-R diagram.  
+
+I should note that, although I believe these examples are enough to draw any
+(moderately complex) diagram, I strongly recommend reading the Tikz/PGF
+manual. Besides being useful if you need to draw something that I did not
+remember to exemplify here, you will be amazed with what Tikz/PGF can do for
+your \LaTeX\ graphics.
+
+
+\section{Drawing E-R Diagrams}
+\label{sec:drawing-e-r}
+
+To use the \emph{Tikz-er2} package you should include the command
+\begin{center}
+    \ttfamily
+    \verb+\usepackage{tikz-er2}+
+\end{center}
+in the preamble of your document. This section shows how to draw each individual
+element in an E-R diagram. Each figure is shown together with the code used to
+generate it.
+
+
+\subsection{Entity Sets}
+\label{sec:entities}
+
+Entity sets are represented using the \texttt{entity} style. The following code
+draws an entity set element. An example, with the respective \LaTeX\ code is
+shown in Figure~\ref{fig:entity}.
+
+\begin{figure}[htb!]
+    \centering
+    \demo{entity}
+    \caption{Entity set.}
+\label{fig:entity}
+\end{figure}
+
+You can change the style of the elements by redefining the \texttt{every
+  entity} style, as shown in Figure~\ref{fig:entity-blue}.
+
+\begin{figure}[htb!]
+    \centering
+    \demo{entity-blue}
+    \caption{Entity set, with a different style.}
+\label{fig:entity-blue}
+\end{figure}
+
+
+\subsection{Attributes}
+\label{sec:attributes}
+
+You can draw all types of attributes, as seen in Figure~\ref{fig:attribute}.
+
+\tikzstyle{every entity} = [fill=blue!30]
+\tikzstyle{every attribute} = [fill=yellow!20]
+\begin{figure}[htb!]
+    \centering
+    \demo{attribute}
+    \caption{Attribute.}
+\label{fig:attribute}
+\end{figure}
+
+Regular attributes are drawn using the \texttt{attribute} style. There is a
+style \texttt{multi attribute} for multi-valued attributes and a style
+\texttt{derived attribute} for derived attributes. Key attributes are draw by
+using the command \verb+\key+ on its label, to get underlined text.
+
+As for entity sets, you can change the style of the attributes by redefining the
+\texttt{every attribute} style.
+
+
+\subsection{Relationship Sets}
+\label{sec:relationships}
+
+\tikzstyle{every relationship} = [fill=red!20]
+
+There is a \texttt{relationship} style for relationship sets. This example
+shows a \emph{many-to-many} relationship. In this case, we changed the style of
+all relationship sets by redefining the \texttt{every relationship} style.
+
+\begin{figure}[htb!]
+    \centering
+    \demo{relationshipM-M}
+    \caption{Relationship set.}
+\label{fig:relationship}
+\end{figure}
+
+There is also a style for the links connecting relationship sets to entity sets
+(and to attribute sets): the \texttt{link} style. In
+Figure~\ref{fig:relationship}, instead of using the \texttt{link} style on
+every edge, we simply redefined the \texttt{every edge} style to use it.
+
+To draw a \emph{one-to-many} relationship, or a one to one relationship, you
+just need to draw an arrowhead on the respective edge. To draw a total
+participation you can use the style \texttt{total} on the corresponding edge. An
+example of both cases is shown in Figure~\ref{fig:relationship1-M}.
+
+\begin{figure}[htb!]
+    \centering
+    \demo{relationship1-M}
+    \caption{One-to-many relationship set, with a total participation.}
+\label{fig:relationship1-M}
+\end{figure}
+
+You can also use an alternative notation, were you specify the cardinality of
+the relationship as a number on the links. In this case, you just need to add a
+label to the respective link, as seen in Figure~\ref{fig:relationship-card}.
+
+\begin{figure}[htb!]
+    \centering
+    \demo{relationship-card}
+    \caption{Alternative notation for relationship set cardinality.}
+\label{fig:relationship-card}
+\end{figure}
+
+The same method can be used to add roles to the participant entities. An
+example is shown in Figure~\ref{fig:roles}.
+
+\begin{figure}[htb!]
+    \centering
+    \demo{roles}
+    \caption{Roles in an E-R diagram.}
+\label{fig:roles}
+\end{figure}
+
+
+\subsection{Weak Entity Sets}
+\label{sec:weak-entities}
+
+The style for weak entities is \texttt{weak entity}, shown in
+Figure~\ref{fig:weak}. The identifying relationship uses style
+\texttt{ident relationship}. The \verb+\discriminator+ command is used to
+draw a dashed underline, to represent the discriminator attribute.
+
+\begin{figure}[htb!]
+    \centering
+    \demo{weak}
+    \caption{Weak entity set.}
+\label{fig:weak}
+\end{figure}
+
+To redefine the style for all weak entities you can use the \texttt{every weak
+  entity} style.
+
+\subsection{Specialization/Generalization}
+\label{sec:spec}
+
+A specialization/generalization is drawn using the \texttt{isa} style,
+exemplified in Figure~\ref{fig:isa}.
+
+\tikzstyle{every isa} = [fill=green!20]
+\begin{figure}[htb!]
+    \centering
+    \demo{isa}
+    \caption{Specialization/generalization.}
+\label{fig:isa}
+\end{figure}
+
+To draw a total specialization/generalization, we can use the \texttt{total}
+style on the corresponding link.  To add constraints, such as
+\emph{disjoint/overlapping}, we can add a label to the corresponding link.
+
+As before, you can also redefine the \texttt{every isa} style, to change the
+appearance of all specialization/generalization symbols.
+
+\subsection{Aggregation}
+\label{sec:aggregation}
+
+Finally, you can draw aggregations by simply joining two relationship sets, as
+shown in Figure~\ref{fig:aggregation}.
+
+\begin{figure}[htb!]
+    \centering
+    \demo{aggregation}
+    \caption{Aggregation.}
+    \label{fig:aggregation}
+\end{figure}
+
+The rectangle around the aggregation can be drawn using the functionalities
+provided by the Tikz \texttt{fit} library, already included by the
+\emph{Tikz-er2} package.
+
+
+\section{A Full Example}
+\label{sec:full-example}
+
+In Figure~\ref{fig:cars} is a an example of a simple complete E-R diagram. It
+represents a database for a used car store. It was used as an exercise in the
+databases course I teach at IST\footnote{http://www.ist.utl.pt}. The code for
+this example can be found in Appendix~\ref{sec:tikz-code-full}.
+
+\begin{sidewaysfigure}[p!]
+    \input{cars}
+    \caption{E-R diagram for a used car store database.}
+\label{fig:cars}
+\end{sidewaysfigure}
+
+
+\section{Other Information}
+\label{sec:other-information}
+
+This package can be obtained at
+\url{http://www.assembla.com/spaces/tikz-er2}. You can use it
+free of charge for whatever you want, in whatever way you need.
+
+The only thing I ask is that you let me know if you make any modifications to
+the package. If they can be useful to everyone, I'll be glad to insert them in
+the next version, giving the proper credit to the author, of course.
+
+\newpage
+
+\appendix
+
+\section{Tikz Code for the Full Example}
+\label{sec:tikz-code-full}
+
+\verbatiminput{cars}    
+
+
+\end{document}
