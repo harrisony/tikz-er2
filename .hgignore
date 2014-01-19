@@ -1,0 +1,17 @@
+syntax: glob
+
+*~
+*.log
+*.aux
+*.dvi
+*.rel
+*.toc
+*.bbl
+*.blg
+*.lot
+*.idx
+*.nav
+*.snm
+*.out
+*.vrb
+*.synctex*
