@@ -23,7 +23,7 @@ Tikz library]
 
 \tikzstyle{link} = [>=triangle 60, draw, thick, every link]
 
-\tikzstyle{total} = [link, line width=2.4pt]
+\tikzstyle{total} = [link, double]
 
 \tikzstyle{entity} = [rectangle, draw, black, very thick,
                       minimum width=6em, minimum height=3em,
@@ -57,6 +57,7 @@ Tikz library]
 
 % for text un key attributes
 \newcommand{\key}[1]{\underline{#1}}
+\newcommand{\weakkey}[1]{\dashuline{#1}}
 
 % for text in discriminator attributes
 \def\discriminator{\bgroup 
